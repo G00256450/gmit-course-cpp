@@ -80,7 +80,7 @@ void TemperatureAndHumidity(){
     else{
         cout <<"Temperature is within acceptable limits.\n"<<endl;
     }
-    if (Temperature>=90){
+    if (Humidity>=90){
         cout<<"ALARM!!! Humidity is in excess of 90 Grams per Cubic Metre!\n"<<endl;
     }
     else{
@@ -93,7 +93,7 @@ return;
 void AngularAreaOfCircle(){
 AreaOfCircle();
 for(int x=0;x<=120;x++){
-    cout<< x <<" Degrees of the circle has a area of: "<<(CircleArea/360)*x<<"\n";
+    cout<< x <<" Degrees of the circle has a area of: "<<(CircleArea/360)*x<<" mm^2\n";
 }
 cout<<"\n";
 return;
@@ -157,9 +157,15 @@ else{
 cout<<"\n";
 }
 
-void OverloadedFunction(){
-cout<<"Check with Stephen to make sure Question Number referenced is correct!!\n\n";
+int FindTheOddNumbers(int a,int b){
+for(int i=a;i<=b;i++){
+    if (i%2!=0){
+        cout<< i <<"\n";
+    }
 }
+return 0;
+}
+
 
 void RandomNumbers(){
 for(int x=1;x<=6;x++){
