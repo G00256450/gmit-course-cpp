@@ -11,13 +11,15 @@ class LabInfo{          // Create a Class Called LabInfo
         int Day;        // Integer to Capture Day
         int Month;      // Integer to Capture Month
         int Year;       // Integer to Capture Year
-};
 
-void printInfo(LabInfo Info){
+        void printInfo(LabInfo Info){
             cout<<Info.Name<<endl;
             cout<<Info.LabID<<endl;
             cout<<"Date: "<<Info.Day<<"/"<<Info.Month<<"/"<<Info.Year<<endl;
         }
+};
+
+
 
 //void Labinfo();
 
@@ -31,7 +33,7 @@ int main(){
     Info.Month=2;
     Info.Year=2021;
 
-    printInfo(Info);
+    Info.printInfo(Info);
 
     return 0;
 }
