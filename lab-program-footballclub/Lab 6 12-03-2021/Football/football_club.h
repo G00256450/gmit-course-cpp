@@ -11,8 +11,8 @@ class FootballClub{
         string District;                                // Stores District
         string StripColour;                             // Stores StripeColour
 
-        Player Squad[2];
-        Player Team[2];
+        Player Squad[40];
+        Player Team[15];
 
     public:
         void printInfo(string Varible){                 // Prints Varible to terminal
@@ -44,6 +44,7 @@ class FootballClub{
                 string tempSecondName;
                 string tempFieldPosition;
                 string tempMobileNumber;
+                cin.sync();
                 cout<<"\nEnter a forename for player "<< i+1 << " : ";
                 getline(cin,tempFirstName);
                 cout<<"Enter a surname player "<< i+1 << " : ";
@@ -58,8 +59,57 @@ class FootballClub{
             }
          }
 
-         void WriteToCSV(int MaxSquad){
-            ofstream fout;
+         void InputTeamData(int MaxTeam,int MaxSquad){
+            PrintSquadInfo(MaxSquad);
+            cout<<"\n\nSelect "<<MaxTeam<<" Players to play on the team!\n";
+            for (int i=0;i<MaxTeam;i++){
+                string tempFirstName;
+                string tempSecondName;
+                string tempFieldPosition;
+                string tempMobileNumber;
+                int PlayerNumber;
+                cout<<"Enter the number for player "<< i+1 <<" you wish to add to the team : ";
+                cin>>PlayerNumber;
+                for (int i=0;i!=PlayerNumber;i++){
+                    tempFirstName = Squad[i].getForename();
+                    tempSecondName = Squad[i].getSurname();
+                    tempFieldPosition = Squad[i].getPosition();
+                    tempMobileNumber = Squad[i].getMobileNumber();
+                }
+                Team[i].setName(tempFirstName,tempSecondName);
+                Team[i].setPosition(tempFieldPosition);
+                Team[i].setMobileNumber(tempMobileNumber);
+            }
+         }
+
+
+         void ModifySquadData(int MaxSquad){
+            PrintSquadInfo(MaxSquad);
+            cout<<"\n\nHere you can modify a players details or replace a player!\n";
+            string tempFirstName;
+            string tempSecondName;
+            string tempFieldPosition;
+            string tempMobileNumber;
+            int PlayerNumber;
+            cout<<"Enter the number for the player you wish to modify/replace : ";
+            cin>>PlayerNumber;
+            cout<<"Modifying Details for player number "<<PlayerNumber<<"!\n\n";
+            cin.sync();
+            cout<<"Enter a forename for the player :";
+            getline(std::cin,tempFirstName);
+            cout<<"Enter a surname for the player :";
+            getline(cin,tempSecondName);
+            cout<<"Enter the field position for the player :";
+            getline(cin,tempFieldPosition);
+            cout<<"Enter a Mobile Number for the player :";
+            getline(cin,tempMobileNumber);
+            Squad[PlayerNumber-1].setName(tempFirstName,tempSecondName);
+            Squad[PlayerNumber-1].setPosition(tempFieldPosition);
+            Squad[PlayerNumber-1].setMobileNumber(tempMobileNumber);
+         }
+
+         void WriteToSquadCSV(int MaxSquad){
+            fstream fout;
             fout.open("Squad_Details.csv", ios::out);
             fout<<" Line # "<<","<<" First Name "<<","<<" Second Name "<<","<<" Field Position "<<","<<" Mobile Number "<<endl;
             for (int i=0;i<MaxSquad;i++){
@@ -69,20 +119,19 @@ class FootballClub{
             cout<<"\nFile Created successfully!"<<endl;
          }
 
-         void DisplayContentCSV(int MaxSquad){
-            fstream fin;
-            string data;
-            cout<<"\n\nDisplaying the content of CSV file\n\n";
-            fin.open("Squad_Details.csv", ios::in);
-            for(int i=0; i<=MaxSquad; i++){
-                getline(fin,data);
-                cout<<data<<"\n";
+         void WriteToTeamCSV(int MaxTeam){
+            fstream fout;
+            fout.open("Team_Details.csv", ios::out);
+            fout<<" Line # "<<","<<" First Name "<<","<<" Second Name "<<","<<" Field Position "<<","<<" Mobile Number "<<endl;
+            for (int i=0;i<MaxTeam;i++){
+                fout<<i+1<<","<<Team[i].getForename()<<","<<Team[i].getSurname()<<","<<Team[i].getPosition()<<","<<Team[i].getMobileNumber()<<endl;
             }
-            cout<<"\n\n";
-
-        }
+            fout.close();
+            cout<<"\nFile Created successfully!"<<endl;
+         }
 
         void PrintSquadInfo(int MaxSquad){
+            cout<<"From Private!\n\n";
             for (int i=0;i<MaxSquad;i++){
                 cout<<"Player "<<i+1<<" Details!\n\n";
                 cout<<"Player Forename : ";
@@ -96,6 +145,110 @@ class FootballClub{
                 cout<<"\n\n";
             }
         }
+
+        void PrintTeamInfo(int MaxTeam){
+            cout<<"From Private!\n\n";
+            for (int i=0;i<MaxTeam;i++){
+                cout<<"Player "<<i+1<<" Details!\n\n";
+                cout<<"Player Forename : ";
+                Team[i].printInfo(Team[i].getForename());
+                cout<<"Player Surname : ";
+                Team[i].printInfo(Team[i].getSurname());
+                cout<<"Field Position : ";
+                Team[i].printInfo(Team[i].getPosition());
+                cout<<"Player Mobile Number : ";
+                Team[i].printInfo(Team[i].getMobileNumber());
+                cout<<"\n\n";
+            }
+        }
+
+        void Read_Line(string FileName) {
+            fstream MyFile;
+            MyFile.open(FileName,ios::in);
+            string Line;
+            string LineNumber;
+            string Forename;
+            string Surname;
+            string Position;
+            string MobileNumber;
+
+            cout<<"-----------------------------------------------------------------------------------------------"<<endl;
+            while(std::getline(MyFile,Line)){
+                istringstream LineData(Line);
+                getline(LineData,LineNumber,',');
+                getline(LineData,Forename,',');
+                getline(LineData,Surname,',');
+                getline(LineData,Position,',');
+                getline(LineData,MobileNumber,'\n');
+
+                cout<<setw(10)<<setfill(' ')<<LineNumber<<"|";
+                cout<<setw(20)<<setfill(' ')<<Forename<< "|";
+                cout<<setw(20)<<setfill(' ')<<Surname<< "|";
+                cout<<setw(20)<<setfill(' ')<<Position<<"|";
+                cout<<setw(20)<<setfill(' ')<<MobileNumber<<"|"<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------"<<endl;
+            }
+            MyFile.close();
+
+        }
+
+         void StoreDatafromSquadCSVtoMemory(){
+            fstream MyFile;
+            MyFile.open("Squad_Details.csv",ios::in);
+            string Line;
+            string LineNumber;
+            string Forename;
+            string Surname;
+            string Position;
+            string MobileNumber;
+            bool FirstIteration=true;
+            int i=0;
+            while(std::getline(MyFile,Line)){
+                if (FirstIteration!=true){
+                    istringstream LineData(Line);
+                    getline(LineData,LineNumber,',');
+                    getline(LineData,Forename,',');
+                    getline(LineData,Surname,',');
+                    getline(LineData,Position,',');
+                    getline(LineData,MobileNumber,'\n');
+                    Squad[i].setName(Forename,Surname);
+                    Squad[i].setPosition(Position);
+                    Squad[i].setMobileNumber(MobileNumber);
+                    i=i+1;
+                }
+                FirstIteration=false;
+            }
+            MyFile.close();
+         }
+
+         void StoreDatafromTeamCSVtoMemory(){
+            fstream MyFile;
+            MyFile.open("Team_Details.csv",ios::in);
+            string Line;
+            string LineNumber;
+            string Forename;
+            string Surname;
+            string Position;
+            string MobileNumber;
+            bool FirstIteration=true;
+            int i=0;
+            while(std::getline(MyFile,Line)){
+                if (FirstIteration!=true){
+                    istringstream LineData(Line);
+                    getline(LineData,LineNumber,',');
+                    getline(LineData,Forename,',');
+                    getline(LineData,Surname,',');
+                    getline(LineData,Position,',');
+                    getline(LineData,MobileNumber,'\n');
+                    Team[i].setName(Forename,Surname);
+                    Team[i].setPosition(Position);
+                    Team[i].setMobileNumber(MobileNumber);
+                    i=i+1;
+                }
+                FirstIteration=false;
+            }
+            MyFile.close();
+         }
 };
 
 
