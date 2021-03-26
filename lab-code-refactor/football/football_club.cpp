@@ -28,14 +28,6 @@
      cout<<clubname<<endl;
     }
 
-    /*void FootballClub::addPlayerToTeam(Player tmp,int ID){
-
-        this->team[ID].setName(tmp.getForename(),tmp.getSurname());
-        this->team[ID].setDOB(tmp.getDOB());
-        this->team[ID].setPosition(tmp.getPosition());
-        this->team[ID].setMobileNumber(tmp.getMobileNumber());
-    }*/
-
     void FootballClub::addPlayerToSquad(Player tmp, int position){
 
        this->squad[position].setName(tmp.getForename(), tmp.getSurname());

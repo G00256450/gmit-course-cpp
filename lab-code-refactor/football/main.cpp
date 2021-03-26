@@ -7,31 +7,6 @@ using namespace std;
 
 #include "football_club.h"
 
-void test(){
-
-/*
-string galwayTeam[2][]=   {{"Ruairi", "Lavelle"},
-                            {"Eoghan", "Kerin"},
-                            {"Sean Andy", "Ó Ceallaigh"},
-                            {"David", "Wynne"},
-                            {"Gary", "O'Donnell"},
-                            {"Gareth", "Bradshaw"},
-                            {"Johnny", "Heaney"},
-                            {"Thomas", "Flynn"},
-                            {"Ciarán", "Duggan"},
-                            {"Michael", "Daly"},
-                            {"Johnathan", "Duane"},
-                            {"Eamon", "Brannigan"},
-                            {"Barry", "McHugh"},
-                            {"Padraig", "Cunningham"},
-                            {"Antaine", "Ó Laoí"}}
-
-*/
-
-}
-
-
-
 
 int main()
 {
