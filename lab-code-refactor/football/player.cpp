@@ -6,6 +6,7 @@
         this->position="";
         this->mobileNumber="";
         this->dob=0;
+        this->playing="";
     }
     Player::Player(string forename, string surname){
         forename=forename;
@@ -13,15 +14,16 @@
     }
 
 
-    Player::Player(string forename, string surname, int mobileNumber, string position){
+    Player::Player(string forename, string surname, int mobileNumber, string position,string playing){
         this->forename=forename;
         this->surname=surname;
         this->mobileNumber=mobileNumber;
         this->position=position;
+        this->playing=playing;
     }
 
     void Player::printPlayerInfo(){
-        cout<<"Name:"<<forename<<" "<<surname<<", DOB: "<<dob<<", position:"<<position<<", contact:"<<mobileNumber<<endl;
+        cout<<"Name:"<<forename<<" "<<surname<<", DOB: "<<dob<<", position:"<<position<<", contact:"<<mobileNumber<<", Playing:"<<playing<<endl;
     }
     string Player::getForename(){
         return forename;
@@ -54,4 +56,10 @@
     }
     int Player::getDOB(){
         return dob;
+    }
+    void Player::setPlaying(string playing){
+       this->playing=playing;
+    }
+    string Player::getPlaying(){
+        return playing;
     }

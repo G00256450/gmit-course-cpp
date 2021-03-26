@@ -15,7 +15,7 @@ private:
     const static int MAXSQUAD = 23;
     const static int MAXTEAM = 15;
     Player squad[MAXSQUAD];
-    Player team[MAXTEAM];
+    //Player team[MAXTEAM];
 
 
 

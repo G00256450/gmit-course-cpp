@@ -28,13 +28,13 @@
      cout<<clubname<<endl;
     }
 
-    void FootballClub::addPlayerToTeam(Player tmp,int ID){
+    /*void FootballClub::addPlayerToTeam(Player tmp,int ID){
 
         this->team[ID].setName(tmp.getForename(),tmp.getSurname());
         this->team[ID].setDOB(tmp.getDOB());
         this->team[ID].setPosition(tmp.getPosition());
         this->team[ID].setMobileNumber(tmp.getMobileNumber());
-    }
+    }*/
 
     void FootballClub::addPlayerToSquad(Player tmp, int position){
 
@@ -43,12 +43,15 @@
         this->squad[position].setDOB(tmp.getDOB());
         this->squad[position].setPosition(tmp.getPosition());
         this->squad[position].setMobileNumber(tmp.getMobileNumber());
+        this->squad[position].setPlaying(tmp.getPlaying());
 
     }
     void FootballClub::printTeam(){
 
-        for(int i=0;i<MAXTEAM;i++){
-            team[i].printPlayerInfo();
+        for(int i=0;i<MAXSQUAD;i++){
+                if (squad[i].getPlaying()=="Yes"){
+                   squad[i].printPlayerInfo();
+                }
         }
 
     }
